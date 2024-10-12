@@ -26,13 +26,12 @@ export const getStudent = async (req, res) => {
         .status(203)
         .json({ message: "User with this email does not exist" });
     }
-
-    if (password === user.password) {
-      return res.status(200).json({ ...user });
-    } else {
-      return res.status(201).json({ message: "Wrong Password" });
+    const passcheck = await bcrypt.compare(password, user.password);
+    if (!passcheck) {
+     return res.status(400).json({ message: "Password not matched" });
     }
-  } catch (error) {
+    return res.status(200).json({ ...user });
+   catch (error) {
     return res.status(500).json({ message: "Could not fetch data" });
   }
 };
