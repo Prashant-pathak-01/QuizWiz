@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
-
-const URL =
-  "mongodb+srv://prashantpathak6395:xoDpZ5pYTwlwBbqp@database.snicp.mongodb.net/?retryWrites=true&w=majority&appName=database";
+import dotenv from "dotenv";
+dotenv.config();
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
+const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
+const URL = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@database.snicp.mongodb.net/?retryWrites=true&w=majority&appName=database`;
 
 async function db() {
   try {

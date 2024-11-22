@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-
+import { Link } from "react-router-dom";
 const AboutPage = () => {
   return (
     <div
@@ -109,7 +108,7 @@ const AboutPage = () => {
         {/* Back Button */}
         <div className="mt-8 text-center">
           <Link
-            to="/" // Navigate to the homepage
+            to="/"
             className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors duration-300"
           >
             Back to Home

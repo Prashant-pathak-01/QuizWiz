@@ -8,8 +8,8 @@ import AuthenticationExaminer from "./Components/Authentication/ExaminerAuth";
 import NotFoundPage from "./Components/Homepage/NotFoundPage";
 import Quiz from "./Components/Candidate/Quiz/Main";
 import JoinQuizPage from "./Components/Homepage/JoinQuiz/JoinQuizPage";
-import AboutPage from "./Components/Homepage/AboutPage";  // Import AboutPage
-import ContactPage from "./Components/Homepage/ContactPage";  // Import ContactPage
+import AboutPage from "./Components/Homepage/AboutPage"; // Import AboutPage
+import ContactPage from "./Components/Homepage/ContactPage"; // Import ContactPage
 function App() {
   return (
     <div className="App">
