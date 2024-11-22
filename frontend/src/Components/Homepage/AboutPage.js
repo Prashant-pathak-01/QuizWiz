@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";  // Import Link from react-router-dom
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const AboutPage = () => {
   return (
@@ -50,7 +50,7 @@ const AboutPage = () => {
               </a>
             </li>
             <li>
-              Shiv Gaur -{" "}
+              Shiva Gaur -{" "}
               <a
                 href="mailto:shivagaur1100@gmail.com"
                 className="text-purple-300 hover:text-white"
@@ -109,7 +109,7 @@ const AboutPage = () => {
         {/* Back Button */}
         <div className="mt-8 text-center">
           <Link
-            to="/"  // Navigate to the homepage
+            to="/" // Navigate to the homepage
             className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors duration-300"
           >
             Back to Home

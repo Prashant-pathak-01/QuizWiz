@@ -7,7 +7,7 @@ import { useAppContext } from "../../LocalStorage";
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import BG2 from '../../Assets/BG2.svg';
+import BG2 from "../../Assets/BG2.svg";
 
 function CandidateAuth() {
   const { user, setUser } = useAppContext();
@@ -108,75 +108,80 @@ function CandidateAuth() {
     setSnackbarOpen(false);
   };
 
-  return (<div
-    style={{
-      backgroundImage: `url(${BG2})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}
-    className="bg-gradient-to-b from-purple-400 via-purple-300 to-purple-400 min-h-screen flex flex-col justify-between items-center"
-  >
-       <Header />
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${BG2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="bg-gradient-to-b from-purple-400 via-purple-300 to-purple-400 min-h-screen flex flex-col justify-between items-center"
+    >
+      <Header />
       <div className="flex flex-col items-center w-full max-w-md p-6 bg-white rounded shadow-md m-20">
         {isLogin ? (
           <>
-          <h2 className="text-2xl font-bold mb-4">Candidate Login</h2>
-          <form className="w-full" onSubmit={handleLogin}>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-        
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <div className="flex items-center">
+            <h2 className="text-2xl font-bold mb-4">Candidate Login</h2>
+            <form className="w-full" onSubmit={handleLogin}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
+                  type="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
-                  placeholder="Enter your password"
+                  placeholder="Enter your email"
                   required
                 />
-                <IconButton
-                  onClick={togglePasswordVisibility}
-                  className="ml-2"
-                  size="small"
-                  aria-label="toggle password visibility"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
               </div>
-            </div>
-        
-            <button
-              type="submit"
-              className="w-full py-2 px-4 bg-purple-500 text-white rounded-md hover:bg-purple-700"
-            >
-              Login
-            </button>
-          </form>
-        
-          <p className="mt-4">
-            Don't have an account?{" "}
-            <span
-              className="text-purple-900 font-bold cursor-pointer"
-              onClick={toggleForm}
-            >
-              Sign Up
-            </span>
-          </p>
-        </>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <div className="flex items-center">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
+                    placeholder="Enter your password"
+                    required
+                  />
+                  <IconButton
+                    onClick={togglePasswordVisibility}
+                    className="ml-2"
+                    size="small"
+                    aria-label="toggle password visibility"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-purple-500 text-white rounded-md hover:bg-purple-700"
+              >
+                Login
+              </button>
+            </form>
+
+            <p className="mt-4">
+              Don't have an account?{" "}
+              <span
+                className="text-purple-900 font-bold cursor-pointer"
+                onClick={toggleForm}
+              >
+                Sign Up
+              </span>
+            </p>
+          </>
         ) : (
           <>
             <h2 className="text-2xl font-bold mb-4">Candidate Sign Up</h2>
@@ -234,7 +239,7 @@ function CandidateAuth() {
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
                   placeholder="Enter your password"
-                  minLength='6'
+                  minLength="6"
                   required
                 />
               </div>
@@ -322,7 +327,7 @@ function CandidateAuth() {
                 onClick={toggleForm}
               >
                 Login
-              </span> 
+              </span>
             </p>
           </>
         )}

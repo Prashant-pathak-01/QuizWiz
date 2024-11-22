@@ -83,7 +83,7 @@ const Statistics = () => {
                 <LineChart
                   xAxis={[
                     {
-                      label: "Quiz Code",
+                      label: "Quiz Name",
                       data: quizCodeArray,
                       scaleType: "band",
                     },
@@ -99,9 +99,8 @@ const Statistics = () => {
                   height={300}
                   title="Candidate's Performance"
                   yAxisLabel="Marks"
-                  xAxisLabel="Quiz Code"
+                  xAxisLabel="Quiz Name"
                 />
-                ;
                 <h2 className="text-lg font-semibold text-purple-900 mb-4">
                   Your Performance per Quiz
                 </h2>

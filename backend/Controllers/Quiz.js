@@ -25,8 +25,6 @@ export const generateQuiz = async (req, res) => {
       quizTitle,
     } = req.body;
 
-    console.log(req.body);
-
     const code = await generateCode();
     const newQuiz = new Quiz({
       code,
