@@ -1,13 +1,28 @@
 import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 function DocumentQuiz({ setMethod }) {
   const [inputText, setInputText] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logic for generating quiz based on inputText
-    console.log("Generated quiz from text:", inputText);
+    try {
+      const generateQuestion = async () => {
+        const genAI = new GoogleGenerativeAI("");
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt =
+          "Generate the following JSON schema. Write 5 question about DSA.\n question={name:String, options:[string,string,string,string], correctOption:String\n}\n return list[question]";
+        const result = await model.generateContent(prompt);
+
+        const rawText = result.response.text();
+
+        console.log(rawText);
+      };
+      await generateQuestion();
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   return (
