@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import FILE_SVG from "./../../../../Assets/icons/pdf-svgrepo-com.svg";
+import pdfToText from "react-pdftotext";
+
 function DocumentUpload({ setMethod }) {
+  const [file, setFile] = useState();
+  const [fileText, setFileText] = useState("");
+  const handleGenerate = async () => {
+    console.log(file.type);
+    if (file.type === "application/pdf") {
+      const res = await extractTextPdf(file);
+      setFileText(res);
+
+      // generate the questions using text- res;
+    }
+  };
+
+  const extractTextPdf = async (file) => {
+    try {
+      const text = await pdfToText(file);
+      return text;
+    } catch (error) {
+      console.error("Failed to extract text from pdf:", error);
+      return "";
+    }
+  };
+
   return (
     <div className="bg-gray-100 flex flex-col min-h-screen">
       <button
@@ -28,7 +52,7 @@ function DocumentUpload({ setMethod }) {
           your audience interested throughout.
         </h2>
         <div className="bg-white shadow-md rounded-lg p-6 w-1/2 flex items-center">
-          <form className="w-full">
+          <div className="w-full">
             <label
               htmlFor="document-upload"
               className="mb-2 text-sm font-medium text-slate-100 sr-only dark:text-white"
@@ -41,19 +65,21 @@ function DocumentUpload({ setMethod }) {
               </div>
               <input
                 type="file"
+                accept=".pdf"
                 id="document-upload"
                 className="block w-full p-4 pl-12 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
                 placeholder="Upload your document"
+                onChange={(e) => setFile(e.target.files[0])}
                 required
               />
               <button
-                type="submit"
                 className="text-white absolute right-2 bottom-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 bg-blue-900"
+                onClick={handleGenerate}
               >
                 Generate Quiz
               </button>
             </div>
-          </form>
+          </div>
         </div>
         <ul className="list-disc list-inside mt-6 w-2/3 p-6">
           {[

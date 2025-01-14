@@ -1,4 +1,6 @@
 import Examiner from "./../Models/Examiner.js";
+import { JSDOM } from "jsdom";
+import axios from "axios";
 
 export const addExaminer = async (req, res) => {
   try {
@@ -34,6 +36,35 @@ export const getExaminer = async (req, res) => {
       return res.status(201).json({ message: "Wrong Password" });
     }
   } catch (error) {
+    return res.status(500).json({ message: "Could not fetch data" });
+  }
+};
+
+export const getTextFromUrl = async (req, res) => {
+  try {
+    const { url } = req.body;
+    const response = await axios.get(url);
+    const html = response.data;
+    const dom = new JSDOM(html);
+    const document = dom.window.document;
+
+    const textContent = [];
+
+    const extractTextNodes = (node) => {
+      if (node.nodeType === 3) {
+        textContent.push(node.nodeValue.trim());
+      }
+
+      if (node.childNodes) {
+        node.childNodes.forEach((child) => extractTextNodes(child));
+      }
+    };
+
+    extractTextNodes(document.body);
+    const mergedText = textContent.join(" ");
+    res.status(200).json({ mergedText });
+  } catch (error) {
+    console.error("Error fetching or processing data:", error);
     return res.status(500).json({ message: "Could not fetch data" });
   }
 };

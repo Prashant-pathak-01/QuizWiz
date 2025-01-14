@@ -4,7 +4,11 @@ import {
   getStudent,
   updateScore,
 } from "./../Controllers/Student.js";
-import { addExaminer, getExaminer } from "./../Controllers/Examiner.js";
+import {
+  addExaminer,
+  getExaminer,
+  getTextFromUrl,
+} from "./../Controllers/Examiner.js";
 import {
   getQuiz,
   generateQuiz,
@@ -25,6 +29,7 @@ route.post("/updateScore", updateScore);
 }
 route.post("/addExaminer", addExaminer);
 route.post("/getExaminer", getExaminer);
+route.post("/getTextFromUrl", getTextFromUrl);
 
 {
   /*  Quiz  */

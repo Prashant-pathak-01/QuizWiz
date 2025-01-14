@@ -6,9 +6,13 @@ function PromptQuiz({ setMethod }) {
   const [prompt, setPrompt] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logic for generating quiz based on the prompt
-    console.log("Generated quiz from prompt:", prompt);
+    if (prompt.length() >= 80) {
+      alert("Prompt Length should be less then 80 characters.");
+    } else {
+      e.preventDefault();
+      // Logic for generating quiz based on the prompt
+      console.log("Generated quiz from prompt:", prompt);
+    }
   };
 
   return (

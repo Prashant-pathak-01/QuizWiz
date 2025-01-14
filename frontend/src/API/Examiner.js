@@ -17,3 +17,12 @@ export const getExaminer = async (data) => {
     console.log(error);
   }
 };
+
+export const getTextFromUrl = async (data) => {
+  try {
+    let res = await axios.post(`${URL}/getTextFromUrl`, data);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import { getTextFromUrl } from "./../../../../API/Examiner";
 function Website({ setMethod }) {
+  const [url, setUrl] = useState("");
+  const handleGenerate = async () => {
+    const res = await getTextFromUrl({ url: url });
+    const text = res.data.mergedText;
+    console.log(text);
+
+    // generate data fron text
+  };
+
   return (
     <div className="bg-gray-100 flex flex-col min-h-screen">
       <button
@@ -27,7 +37,7 @@ function Website({ setMethod }) {
           throughout.
         </h2>
         <div className="bg-white shadow-md rounded-lg p-6 w-1/2 flex items-center">
-          <form className="w-full">
+          <div className="w-full">
             <label
               htmlFor="website-search"
               className="mb-2 text-sm font-medium text-slate-100 sr-only dark:text-white"
@@ -44,15 +54,16 @@ function Website({ setMethod }) {
                 className="block w-full p-4 pl-12 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
                 placeholder="Enter the website link"
                 required
+                onChange={(e) => setUrl(e.target.value)}
               />
               <button
-                type="submit"
+                onClick={handleGenerate}
                 className="text-white absolute right-2 bottom-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 bg-blue-900"
               >
                 Generate
               </button>
             </div>
-          </form>
+          </div>
         </div>
         <ul className="list-disc list-inside mt-6 w-2/3 p-6">
           {[
