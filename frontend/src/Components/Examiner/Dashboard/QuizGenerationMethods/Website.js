@@ -2,14 +2,28 @@ import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import { getTextFromUrl } from "./../../../../API/Examiner";
+import { generateQuestions } from "./../../../../API/Examiner";
+import { useAppContext } from "../../../../LocalStorage";
 function Website({ setMethod }) {
   const [url, setUrl] = useState("");
+  const { setQuestions } = useAppContext();
+
   const handleGenerate = async () => {
     const res = await getTextFromUrl({ url: url });
     const text = res.data.mergedText;
-    console.log(text);
+    await handleSubmit(text);
+  };
 
-    // generate data fron text
+  const handleSubmit = async (text) => {
+    const res = await generateQuestions({
+      num_questions: "5",
+      text: text,
+      prompt: "",
+    });
+    if (res.status == 200) {
+      setQuestions(res.data);
+    }
+    setMethod(7);
   };
 
   return (

@@ -66,7 +66,7 @@ function Manual({ setMethod }) {
   };
 
   const confirm = () => {
-    setMethod(7);
+    setMethod(8);
   };
 
   const handleOptionChange = (index, value) => {

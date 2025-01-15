@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
-
+import { generateQuestions } from "./../../../../API/Examiner";
+import { useAppContext } from "../../../../LocalStorage";
 function PromptQuiz({ setMethod }) {
+  const { setQuestions } = useAppContext();
   const [prompt, setPrompt] = useState("");
 
-  const handleSubmit = (e) => {
-    if (prompt.length() >= 80) {
+  const handleSubmit = async (e) => {
+    if (prompt.length >= 80) {
       alert("Prompt Length should be less then 80 characters.");
     } else {
       e.preventDefault();
-      // Logic for generating quiz based on the prompt
-      console.log("Generated quiz from prompt:", prompt);
+      const res = await generateQuestions({
+        num_questions: "5",
+        text: prompt,
+        default_prompt: "",
+        prompt: "",
+      });
+      if (res.status == 200) {
+        setQuestions(res.data);
+      }
+      setMethod(7);
     }
   };
 
@@ -35,7 +44,7 @@ function PromptQuiz({ setMethod }) {
           sessions, or creative exercises!
         </h2>
         <div className="bg-white shadow-md rounded-lg p-6 w-1/2 flex items-center">
-          <form className="w-full" onSubmit={handleSubmit}>
+          <div className="w-full">
             <label
               htmlFor="prompt-input"
               className="mb-2 text-sm font-medium text-slate-100 sr-only"
@@ -53,13 +62,13 @@ function PromptQuiz({ setMethod }) {
                 required
               />
               <button
-                type="submit"
+                onClick={handleSubmit}
                 className="text-white absolute right-2 bottom-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 bg-blue-900"
               >
                 Generate
               </button>
             </div>
-          </form>
+          </div>
         </div>
         <ul className="list-disc list-inside mt-6 w-2/3 p-6">
           {[

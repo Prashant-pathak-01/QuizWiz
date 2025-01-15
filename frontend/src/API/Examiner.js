@@ -26,3 +26,15 @@ export const getTextFromUrl = async (data) => {
     console.log(error);
   }
 };
+
+export const generateQuestions = async (data) => {
+  try {
+    let res = await axios.post(
+      "https://quizgenerator-1.onrender.com/generate-quiz",
+      data
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

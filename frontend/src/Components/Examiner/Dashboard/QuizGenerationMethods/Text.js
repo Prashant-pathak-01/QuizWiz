@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { generateQuestions } from "./../../../../API/Examiner";
+import { useAppContext } from "../../../../LocalStorage";
+
 function DocumentQuiz({ setMethod }) {
   const [inputText, setInputText] = useState("");
+  const { setQuestions } = useAppContext();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const generateQuestion = async () => {
-        const genAI = new GoogleGenerativeAI("");
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const prompt =
-          "Generate the following JSON schema. Write 5 question about DSA.\n question={name:String, options:[string,string,string,string], correctOption:String\n}\n return list[question]";
-        const result = await model.generateContent(prompt);
-
-        const rawText = result.response.text();
-
-        console.log(rawText);
-      };
-      await generateQuestion();
-    } catch (error) {
-      console.error("An error occurred:", error);
+    if (inputText.length < 80) {
+      alert("The data you have provided is not sufficient.");
+    } else {
+      e.preventDefault();
+      const res = await generateQuestions({
+        num_questions: "5",
+        text: inputText,
+        default_prompt: "",
+        prompt: "",
+      });
+      if (res.status == 200) {
+        setQuestions(res.data);
+      }
+      setMethod(7);
     }
   };
 
@@ -50,7 +51,7 @@ function DocumentQuiz({ setMethod }) {
           training sessions, or entertainment!
         </h2>
         <div className="bg-white shadow-md rounded-lg p-6 w-1/2 flex items-center">
-          <form className="w-full" onSubmit={handleSubmit}>
+          <div className="w-full">
             <label
               htmlFor="text-input"
               className="mb-2 text-sm font-medium text-slate-100 sr-only"
@@ -68,13 +69,13 @@ function DocumentQuiz({ setMethod }) {
                 required
               />
               <button
-                type="submit"
+                onSubmit={handleSubmit}
                 className="text-white absolute right-2 bottom-2 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 bg-blue-900"
               >
                 Generate
               </button>
             </div>
-          </form>
+          </div>
         </div>
         <ul className="list-disc list-inside mt-6 w-2/3 p-6">
           {[

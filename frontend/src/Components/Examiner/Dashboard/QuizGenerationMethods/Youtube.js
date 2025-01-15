@@ -1,10 +1,10 @@
 import React from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-import SearchIcon from "@mui/icons-material/Search";
 import YOUTUBE_SVG from "./../../../../Assets/icons/youtube-svgrepo-com (1).svg";
 import { YouTube } from "@mui/icons-material";
 
 function Youtube({ setMethod }) {
+  const handleSubmit = async () => {};
   return (
     <div className="bg-gray-100 flex flex-col min-h-screen">
       <button
@@ -15,7 +15,7 @@ function Youtube({ setMethod }) {
         <h1 className="ml-1 font-rubik font-bold">Back</h1>
       </button>
       <div className="flex flex-col justify-center items-center p-8">
-        <h1 className="text-3xl font-rubik font-bold mb-4 flex items-center border-b-4  w-2/3 items-center justify-center border-purple-300 rounded">
+        <h1 className="text-3xl font-rubik font-bold mb-4 flex  border-b-4  w-2/3 items-center justify-center border-purple-300 rounded">
           <span>Create Quizzes from</span>
           <img src={YOUTUBE_SVG} alt="YouTube Logo" className="w-20 p-3" />
           <span>Videos</span>
@@ -29,7 +29,7 @@ function Youtube({ setMethod }) {
           engaging with quizzes that keep your audience interested throughout.
         </h2>
         <div className="bg-white shadow-md rounded-lg p-6 w-1/2 flex items-center">
-          <form class="w-full">
+          <div class="w-full">
             <label
               for="default-search"
               class="mb-2 text-sm font-medium text-slate-100 sr-only dark:text-white"
@@ -46,13 +46,13 @@ function Youtube({ setMethod }) {
                 required
               />
               <button
-                type="submit"
+                onClick={handleSubmit}
                 class="text-white absolute end-2 bottom-2  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 bg-blue-900"
               >
                 Generate
               </button>
             </div>
-          </form>
+          </div>
         </div>
         <ul className="list-disc list-inside mt-6 w-2/3 p-6">
           {[

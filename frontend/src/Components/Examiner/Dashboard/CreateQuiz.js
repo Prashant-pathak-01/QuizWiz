@@ -11,6 +11,7 @@ import Document from "./QuizGenerationMethods/Document";
 import Text from "./QuizGenerationMethods/Text";
 import Prompt from "./QuizGenerationMethods/Prompt";
 import Manual from "./QuizGenerationMethods/Manual";
+import Preview from "./QuizGenerationMethods/preview";
 import ConfirmationAndDetails from "./QuizGenerationMethods/ConfirmationAndDetails";
 function CreateQuiz() {
   const [method, setMethod] = useState(0);
@@ -121,6 +122,8 @@ function CreateQuiz() {
         <Prompt setMethod={setMethod} />
       ) : method === 6 ? (
         <Manual setMethod={setMethod} />
+      ) : method === 7 ? (
+        <Preview setMethod={setMethod}></Preview>
       ) : (
         <ConfirmationAndDetails setMethod={setMethod}></ConfirmationAndDetails>
       )}
